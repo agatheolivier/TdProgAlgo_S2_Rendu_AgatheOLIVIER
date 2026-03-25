@@ -24,9 +24,9 @@ int main() {
     selection_sort(tableau);
 
     //Affichage du tableau pour débug
-    for (size_t i = 0; i < tableau.size(); i++){
+    /*for (size_t i = 0; i < tableau.size(); i++){
         std::cout << tableau[i] << ", " <<  std::endl;
-    }
+    }*/
 
     if (is_sorted(tableau)) {
         std::cout << "Le tableau est trié" << std::endl;

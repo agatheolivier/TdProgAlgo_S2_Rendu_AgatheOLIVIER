@@ -1,8 +1,22 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <cstdlib>
 
-bool is_sorted(std::vector<int> const& vec) { return std::is_sorted(vec.begin(), vec.end()); }
+/*************************************************** Trie par sélection *****************************************************/
+void selection_sort(std::vector<int> & vec){
+    for (size_t i = 0; i < vec.size(); i++){
+        int minimumIndex = i;
+        for (size_t j = i+1; j < vec.size(); j++){
+            if (vec[j] < vec[minimumIndex]) {
+                minimumIndex = j;
+            }
+        }
+        int pivot = vec[i];
+        vec[i] = vec[minimumIndex];
+        vec[minimumIndex] = pivot;
+    }
+}
 
 /*************************************************** Trie par fusion *****************************************************/
 //Fusionne
@@ -48,18 +62,11 @@ void merge_sort(std::vector<int> & vec) {
     merge_sort(vec, 0, vec.size() - 1);
 }
 
-int main() {
-    std::vector<int> tableau {6, 2, 8, 1, 5, 3, 9};
-    merge_sort(tableau);
+/********************************************* Générer tableau ******************************************************/
 
-    //Affichage du tableau pour débug
-    for (size_t i = 0; i < tableau.size(); i++){
-        std::cout << tableau[i] << ", " <<  std::endl;
-    }
-
-    if (is_sorted(tableau)) {
-        std::cout << "Le tableau est trié" << std::endl;
-    } else {
-        std::cout << "Le tableau n'est pas trié" << std::endl;
-    }
+std::vector<int> generate_random_vector(size_t const size, int const max = 100) {
+    std::vector<int> vec(size);
+    std::generate(vec.begin(), vec.end(), [&max]() { return std::rand() % max;} );
+    return vec;
 }
+
